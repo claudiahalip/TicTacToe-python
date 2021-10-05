@@ -6,7 +6,7 @@ a CLI Tic Tac Toe build with python that allows you to play the game
 
 install python3
 
-use the package manager [ pip3 ] 
+use the package manager [ [pip3 ] 
 to install pytest or pytest-watch
 
 ```pip3 install pytest```
@@ -22,5 +22,9 @@ to install pytest or pytest-watch
 ```ptw```
 
 ```pytest```
+
+## Circle CI
+
+[![ClaudiaHalip](https://circleci.com/gh/claudiahalip/TicTacToe.svg?style=svg)](https://app.circleci.com/pipelines/github/claudiahalip/TicTacToe-python)
 
 
