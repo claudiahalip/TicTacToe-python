@@ -3,12 +3,17 @@ version: 2.1
 workflows:
   test_deploy:
     jobs:
-      -test
+      - test
 
 jobs:
   test:
     docker:
-      -image: circleci/python:3.8.9
+      - image: circleci/python:3.8.9
     steps:
-      -checkout
-      -run: python3 --version
+      - checkout
+      - run: 
+          name: Install dependencies
+          command: pip install pytest
+      - run: 
+          name: Run Tests
+          command: pytest
