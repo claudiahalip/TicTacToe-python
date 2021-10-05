@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
 
-from play_game import *
+from lib.play_game import *
 
 PlayGame.start()
