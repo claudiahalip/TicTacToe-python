@@ -25,6 +25,6 @@ to install pytest or pytest-watch
 
 ## Circle CI
 
-[CircleCI](https://circleci.com/gh/claudiahalip/TicTacToe.svg?style=shield&circle-token=08d25ac553685f11c8d043d64d5d92546ce5201d)](https://app.circleci.com/pipelines/github/claudiahalip/TicTacToe-python)
+[![CircleCI](https://circleci.com/gh/claudiahalip/TicTacToe.svg?style=shield&circle-token=08d25ac553685f11c8d043d64d5d92546ce5201d)](https://app.circleci.com/pipelines/github/claudiahalip/TicTacToe-python)
 
 
