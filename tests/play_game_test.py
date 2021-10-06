@@ -4,4 +4,6 @@ class TestPlayGame:
     
     def test_start(self):
         assert True == True
+    def test_start_2(self):
+        assert 1 == 2
    
