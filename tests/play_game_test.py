@@ -7,3 +7,4 @@ class TestPlayGame:
 
     def test_start(self):
         assert 1 == 1
+
