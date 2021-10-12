@@ -1,9 +1,20 @@
 class Board:
-    board = {1: " ", 2: " ", 3: " ", 4: " ", 5: " ", 6: " ", 7: " ", 8: " ", 9: " "}
+    def __init__(self):
+        self.board = {
+            1: " ",
+            2: " ",
+            3: " ",
+            4: " ",
+            5: " ",
+            6: " ",
+            7: " ",
+            8: " ",
+            9: " ",
+        }
 
-    def display_board():
-        print(Board.board[1] + "  | " + Board.board[2] + " | " + Board.board[3])
+    def display_board(self):
+        print(self.board[1] + "  | " + self.board[2] + " | " + self.board[3])
         print("-----------")
-        print(Board.board[4] + "  | " + Board.board[5] + " | " + Board.board[6])
+        print(self.board[4] + "  | " + self.board[5] + " | " + self.board[6])
         print("-----------")
-        print(Board.board[7] + "  | " + Board.board[8] + " | " + Board.board[9])
+        print(self.board[7] + "  | " + self.board[8] + " | " + self.board[9])
