@@ -14,6 +14,9 @@ class TestBoard:
         new_board = Board()
         new_board.move(1, "X")
         assert new_board.position_taken(1) == True
+        new_board = Board()
+        new_board.move(1, " ")
+        assert new_board.position_taken(1) == False
 
     def test_board_full(self):
         new_board = Board()
