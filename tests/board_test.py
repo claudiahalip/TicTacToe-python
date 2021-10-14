@@ -21,3 +21,6 @@ class TestBoard:
     def test_board_full(self):
         new_board = Board()
         assert new_board.board_full() == False
+        new_board = Board()
+        new_board.board = {"1": "O","2": "X","3": "O","4": "X","5": "O","6": "X","7": "X","8": "O","9": "X",}
+        assert new_board.board_full() == True

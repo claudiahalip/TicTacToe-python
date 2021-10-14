@@ -13,11 +13,11 @@ class Board:
         }
 
     def display_board(self):
-        print(self.board["1"] + "  | " + self.board["2"] + " | " + self.board["3"])
+        print(self.board["1"] + " | " + self.board["2"] + " | " + self.board["3"])
         print("-----------")
-        print(self.board["4"] + "  | " + self.board["5"] + " | " + self.board["6"])
+        print(self.board["4"] + " | " + self.board["5"] + " | " + self.board["6"])
         print("-----------")
-        print(self.board["7"] + "  | " + self.board["8"] + " | " + self.board["9"])
+        print(self.board["7"] + " | " + self.board["8"] + " | " + self.board["9"])
 
     def move(self, input, mark):
         self.board[input] = mark
