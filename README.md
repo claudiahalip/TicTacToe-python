@@ -6,12 +6,12 @@ a CLI Tic Tac Toe build with python that allows you to play the game
 
 install python3
 
-use the package manager [pip3](https://pip.pypa.io/en/stable/) 
-to install pytest or pytest-watch
+install pip [pip3](https://pip.pypa.io/en/stable/) 
 
-```pip3 install pytest```
+to isntall all the dependencies run:
+```pip install -r requirements.txt```
 
-```pip3 install pytest-watch```
+
 
 ## Starting the game
 

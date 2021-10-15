@@ -26,7 +26,7 @@ class Board:
         self.board[input] = mark
 
     def position_taken(self, input):
-        return self.board[input] != " "
+        return self.board[input] != self.cell
 
     def board_full(self):
         return self.cell not in self.board.values()
