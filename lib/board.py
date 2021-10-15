@@ -1,15 +1,18 @@
 class Board:
+
+    cell = " "
+
     def __init__(self):
         self.board = {
-            "1": None,
-            "2": None,
-            "3": None,
-            "4": None,
-            "5": None,
-            "6": None,
-            "7": None,
-            "8": None,
-            "9": None,
+            "1": self.cell,
+            "2": self.cell,
+            "3": self.cell,
+            "4": self.cell,
+            "5": self.cell,
+            "6": self.cell,
+            "7": self.cell,
+            "8": self.cell,
+            "9": self.cell,
         }
 
     def display_board(self):
@@ -26,4 +29,4 @@ class Board:
         return self.board[input] != " "
 
     def board_full(self):
-        return None not in self.board.values()
+        return self.cell not in self.board.values()
