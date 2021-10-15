@@ -1,18 +1,18 @@
 class Board:
 
-    cell = " "
+    empty_space = " "
 
     def __init__(self):
         self.board = {
-            "1": self.cell,
-            "2": self.cell,
-            "3": self.cell,
-            "4": self.cell,
-            "5": self.cell,
-            "6": self.cell,
-            "7": self.cell,
-            "8": self.cell,
-            "9": self.cell,
+            "1": self.empty_space,
+            "2": self.empty_space,
+            "3": self.empty_space,
+            "4": self.empty_space,
+            "5": self.empty_space,
+            "6": self.empty_space,
+            "7": self.empty_space,
+            "8": self.empty_space,
+            "9": self.empty_space,
         }
 
     def display_board(self):
@@ -26,7 +26,7 @@ class Board:
         self.board[input] = mark
 
     def position_taken(self, input):
-        return self.board[input] != self.cell
+        return self.board[input] != self.empty_space
 
     def board_full(self):
-        return self.cell not in self.board.values()
+        return self.empty_space not in self.board.values()
