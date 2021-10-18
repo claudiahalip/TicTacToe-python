@@ -1,5 +1,12 @@
 import pytest
 from ..lib.board import *
+from ..lib.play_game import *
+from ..lib.board import *
+from ..lib.ui import *
+import pytest
+import mock
+from mock import patch
+from mock import Mock
 
 
 class TestBoard:

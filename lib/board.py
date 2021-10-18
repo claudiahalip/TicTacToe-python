@@ -16,11 +16,13 @@ class Board:
         }
 
     def display_board(self):
-        print(self.board["1"] + " | " + self.board["2"] + " | " + self.board["3"])
-        print("-----------")
-        print(self.board["4"] + " | " + self.board["5"] + " | " + self.board["6"])
-        print("-----------")
-        print(self.board["7"] + " | " + self.board["8"] + " | " + self.board["9"])
+        for key in self.board:
+            if int(key) % 3 == 0 and int(key) != 9:
+                print(self.board[key] + "\n" + "---------")
+            elif int(key) == 9:
+                print(self.board[key] + "\n")
+            else:
+                print(self.board[key], end=" | ")
 
     def move(self, input, mark):
         self.board[input] = mark
