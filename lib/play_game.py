@@ -10,7 +10,7 @@ class PlayGame:
     def start(self):
         self.ui.display("Welcome to TIC TAC TOE!")
         self.board.display_board()
-        while not self.board.board_full():
+        while not self.board.board_full(self.board.board):
             self.turn()
 
     def turn(self):

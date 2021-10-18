@@ -1,36 +1,53 @@
+import pytest
 from ..lib.board import *
 
 
 class TestBoard:
-    def test_move(self):
-        #     move method changes the value of the given key( number from the user) from empty to the given mark
+    def test_move_marks_the_board_with_marker(self):
         new_board = Board()
         new_board.move(1, "X")
         assert new_board.board[1] == "X"
 
-    def test_position_taken(self):
-        # position_taken method will check if the value of the given key is not
-        # not emply and return True
+    # test for position_taken method
+    @pytest.mark.parametrize("test_input, expected", [("1", False), ("2", True)])
+    def test_position_taken(self, test_input, expected):
         new_board = Board()
-        new_board.move(1, "X")
-        assert new_board.position_taken(1) == True
-        new_board = Board()
-        new_board.move(1, " ")
-        assert new_board.position_taken(1) == False
+        new_board.move("2", "X")
+        assert new_board.position_taken(test_input) == expected
 
-    def test_board_full(self):
-        new_board = Board()
-        assert new_board.board_full() == False
-        new_board = Board()
-        new_board.board = {
-            "1": "O",
-            "2": "X",
-            "3": "O",
-            "4": "X",
-            "5": "O",
-            "6": "X",
-            "7": "X",
-            "8": "O",
-            "9": "X",
-        }
-        assert new_board.board_full() == True
+    @pytest.mark.parametrize(
+        "test_input, expected",
+        [
+            (
+                {
+                    "1": "O",
+                    "2": "X",
+                    "3": "O",
+                    "4": "X",
+                    "5": "O",
+                    "6": "X",
+                    "7": "X",
+                    "8": "O",
+                    "9": "X",
+                },
+                True,
+            ),
+            (
+                {
+                    "1": " ",
+                    "2": " ",
+                    "3": " ",
+                    "4": " ",
+                    "5": " ",
+                    "6": " ",
+                    "7": " ",
+                    "8": " ",
+                    "9": " ",
+                },
+                False,
+            ),
+        ],
+    )
+    def test_board_full(self, test_input, expected):
+        board = Board()
+        assert board.board_full(test_input) == expected

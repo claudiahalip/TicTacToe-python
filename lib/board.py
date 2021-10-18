@@ -28,5 +28,5 @@ class Board:
     def position_taken(self, input):
         return self.board[input] != self.empty_space
 
-    def board_full(self):
-        return self.empty_space not in self.board.values()
+    def board_full(self, dict):
+        return self.empty_space not in dict.values()
