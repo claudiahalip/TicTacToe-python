@@ -20,10 +20,11 @@ class PlayGame:
         if self.valid_input(input_number) and not self.board.position_taken(
             input_number
         ):
-            mark = self.current_mark()
+            mark = self.current_mark(input_number)
             self.board.move(input_number, mark)
             self.board.display_board()
-            self.display_player_turn(mark)
+            next_player = int(input_number) + 1
+            self.ui.display("It's " + self.current_mark(next_player) + "'s turn")
         else:
             self.ui.display("Invalid number")
             self.turn()
@@ -31,18 +32,8 @@ class PlayGame:
     def valid_input(self, input):
         return input in self.board.board.keys()
 
-    def taken_turns_count(self, dict):
-        return sum(turn != " " for turn in dict.values())
-
-    def current_mark(self):
-        turns = self.taken_turns_count(self.board.board)
-        if turns % 2 == 0:
-            return "X"
-        else:
+    def current_mark(self, input):
+        if int(input) % 2 == 0:
             return "O"
-
-    def display_player_turn(self, mark):
-        if mark == "O":
-            return self.ui.display("It's X's turn")
         else:
-            return self.ui.display("It's O's turn")
+            return "X"
