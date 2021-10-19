@@ -11,29 +11,30 @@ class PlayGame:
         self.ui.display("Welcome to TIC TAC TOE!")
         self.board.display_board()
         self.ui.display("X goes first")
+        current_player = "X"
         while not self.board.board_full(self.board.board):
-            self.turn()
+            self.turn(current_player)
+            current_player = self.next_player(current_player)
 
-    def turn(self):
+    def turn(self, mark):
         self.ui.display("Choose a number between 1 and 9:")
         input_number = input()
+
         if self.valid_input(input_number) and not self.board.position_taken(
             input_number
         ):
-            mark = self.current_mark(input_number)
             self.board.move(input_number, mark)
             self.board.display_board()
-            next_player = int(input_number) + 1
-            self.ui.display("It's " + self.current_mark(next_player) + "'s turn")
+            self.ui.display("It's " + self.next_player(mark) + "'s turn")
         else:
             self.ui.display("Invalid number")
-            self.turn()
+            self.turn(mark)
 
     def valid_input(self, input):
         return input in self.board.board.keys()
 
-    def current_mark(self, input):
-        if int(input) % 2 == 0:
+    def next_player(self, mark):
+        if mark == "X":
             return "O"
-        else:
+        elif mark == "O":
             return "X"

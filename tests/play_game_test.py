@@ -31,9 +31,9 @@ class TestPlayGame:
         assert play_game.valid_input("1") == True
         assert play_game.valid_input("0") == False
 
-    @pytest.mark.parametrize("input, expected", [("1", "X"), ("2", "O")])
-    def test_current_mark(self, input, expected):
+    @pytest.mark.parametrize("input, expected", [("O", "X"), ("X", "O")])
+    def test_next_player(self, input, expected):
         board = Mock()
         ui = UI()
         play_game = PlayGame(board, ui)
-        assert play_game.current_mark(input) == expected
+        assert play_game.next_player(input) == expected
