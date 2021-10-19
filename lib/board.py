@@ -1,8 +1,12 @@
+from .ui import *
+
+
 class Board:
 
     empty_space = " "
 
-    def __init__(self):
+    def __init__(self, ui):
+        self.ui = ui
         self.board = {
             "1": self.empty_space,
             "2": self.empty_space,
@@ -18,9 +22,9 @@ class Board:
     def display_board(self):
         for key in self.board:
             if int(key) % 3 == 0 and int(key) != 9:
-                print(self.board[key] + "\n" + "---------")
+                self.ui.display(self.board[key] + "\n" + "---------")
             elif int(key) == 9:
-                print(self.board[key] + "\n")
+                self.ui.display(self.board[key] + "\n")
             else:
                 print(self.board[key], end=" | ")
 

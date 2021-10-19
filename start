@@ -6,7 +6,7 @@ from lib.ui import *
 
 
 ui = UI()
-board = Board()
+board = Board(ui)
 
 play_game = PlayGame(board, ui)
 play_game.start()

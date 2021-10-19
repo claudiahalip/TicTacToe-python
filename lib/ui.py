@@ -1,3 +1,3 @@
 class UI:
-    def display(self, output):
-        print(output)
+    def display(self, output, end=""):
+        print(output, end)
