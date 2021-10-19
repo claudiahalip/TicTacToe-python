@@ -15,5 +15,8 @@ jobs:
           name: Install dependencies
           command: pip install pytest
       - run: 
+          name: Install dependencies
+          command: pip install mock
+      - run: 
           name: Run Tests
           command: pytest
