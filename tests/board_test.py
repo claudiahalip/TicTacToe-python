@@ -1,6 +1,6 @@
 import pytest
 from ..lib.board import *
-from ..lib.play_game import *
+from ..lib.game import *
 from ..lib.board import *
 from ..lib.ui import *
 import pytest

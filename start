@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from lib.play_game import *
+from lib.game import *
 from lib.board import *
 from lib.ui import *
 
@@ -8,6 +8,6 @@ from lib.ui import *
 ui = UI()
 board = Board(ui)
 
-play_game = PlayGame(board, ui)
+play_game = Game(board, ui)
 play_game.start()
 
