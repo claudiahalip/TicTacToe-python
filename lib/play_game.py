@@ -3,6 +3,10 @@ from .ui import *
 
 
 class PlayGame:
+
+    current_player = "X"
+    next_player = "O"
+
     def __init__(self, board, ui):
         self.board = board
         self.ui = ui
@@ -10,11 +14,10 @@ class PlayGame:
     def start(self):
         self.ui.display("Welcome to TIC TAC TOE!")
         self.board.display_board()
-        self.ui.display("X goes first")
-        current_player = "X"
+        self.ui.display(self.current_player + " goes first")
         while not self.board.board_full(self.board.board):
-            self.turn(current_player)
-            current_player = self.next_player(current_player)
+            self.turn(self.current_player)
+            self.switch_players()
 
     def turn(self, mark):
         self.ui.display("Choose a number between 1 and 9:")
@@ -25,7 +28,7 @@ class PlayGame:
         ):
             self.board.move(input_number, mark)
             self.board.display_board()
-            self.ui.display("It's " + self.next_player(mark) + "'s turn")
+            self.ui.display("It's " + self.next_player + "'s turn")
         else:
             self.ui.display("Invalid number")
             self.turn(mark)
@@ -33,8 +36,5 @@ class PlayGame:
     def valid_input(self, input):
         return input in self.board.board.keys()
 
-    def next_player(self, mark):
-        if mark == "X":
-            return "O"
-        elif mark == "O":
-            return "X"
+    def switch_players(self):
+        self.current_player, self.next_player = self.next_player, self.current_player
