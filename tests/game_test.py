@@ -34,30 +34,21 @@ class TestGame:
             mock_take_turns.assert_called
 
     # #tests for take_turns method
-    # TRUE, TRUE
-    @patch.object(Board, "move")
+    @patch.object(UI, "get_user_input", side_effect=["2", "0", "3"])
+    @patch.object(UI, "display")
     @patch.object(Board, "display_board")
-    def test_the_take_turns_method_when_the_input_is_valid_and_the_position_is_not_taken_1(
-        self, mock_move, mock_display_board
+    @patch.object(Board, "move")
+    def test_the_take_turns_method(
+        self, mock_input, mock_move, mock_display_board, mock_display
     ):
-        ui = Mock()
+        ui = UI()
         board = Board(ui)
         game = Game(board, ui)
-        game.take_turns("X", "1")
+        board.move("3", "X")
+        game.take_turns("X")
         mock_move.assert_called()
         mock_display_board.assert_called()
-
-    # TRUE, FALSE
-    @patch.object(UI, "display")
-    def test_the_take_turns_method_when_the_input_is_valid_and_the_position_is_taken(
-        self, mock_display
-    ):
-        ui = Mock()
-        board = Board(ui)
-        board.move("5", "X")
-        game = Game(board, ui)
-        game.take_turns("X", "5")
-        mock_display.assert_called
+        mock_display.assert_called()
 
     @pytest.mark.parametrize("input, expected", [("1", True), ("0", False)])
     def test_valid_input(self, input, expected):
@@ -72,3 +63,10 @@ class TestGame:
         game = Game(board, ui)
         game.switch_players()
         assert game.current_player == "O"
+
+    @patch.object(UI, "get_user_input", side_effect=["1", "2"])
+    def test_simple_function(self, mock_input):
+        ui = UI()
+        board = Board(ui)
+        game = Game(board, ui)
+        assert game.simple_method() == ["1", "2"]
