@@ -37,8 +37,3 @@ class Game:
 
     def switch_players(self):
         self.current_player, self.next_player = self.next_player, self.current_player
-
-    def simple_method(self):
-        input = self.ui.get_user_input()
-        another_input = self.ui.get_user_input()
-        return [input, another_input]
