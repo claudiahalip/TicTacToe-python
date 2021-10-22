@@ -24,40 +24,23 @@ class TestBoard:
         new_board.move("2", "X")
         assert new_board.position_taken(test_input) == expected
 
-    @pytest.mark.parametrize(
-        "test_input, expected",
-        [
-            (
-                {
-                    "1": "O",
-                    "2": "X",
-                    "3": "O",
-                    "4": "X",
-                    "5": "O",
-                    "6": "X",
-                    "7": "X",
-                    "8": "O",
-                    "9": "X",
-                },
-                True,
-            ),
-            (
-                {
-                    "1": " ",
-                    "2": " ",
-                    "3": " ",
-                    "4": " ",
-                    "5": " ",
-                    "6": " ",
-                    "7": " ",
-                    "8": " ",
-                    "9": " ",
-                },
-                False,
-            ),
-        ],
-    )
-    def test_board_full(self, test_input, expected):
+    def test_board_is_full(self):
         ui = UI()
         board = Board(ui)
-        assert board.board_full(test_input) == expected
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "X",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "O",
+            "8": "O",
+            "9": "X",
+        }
+        assert board.board_is_full() == True
+
+    def test_board_is_not_full_(self):
+        ui = UI()
+        board = Board(ui)
+        assert board.board_is_full() == False

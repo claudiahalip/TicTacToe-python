@@ -18,6 +18,16 @@ class Board:
             "8": self.empty_space,
             "9": self.empty_space,
         }
+        self.win_combinations = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 4, 7],
+            [2, 5, 8],
+            [3, 6, 9],
+            [1, 5, 9],
+            [3, 5, 7],
+        ]
 
     def display_board(self):
         for key in self.board:
@@ -34,5 +44,5 @@ class Board:
     def position_taken(self, input):
         return self.board[input] != self.empty_space
 
-    def board_full(self, dict):
-        return self.empty_space not in dict.values()
+    def board_is_full(self):
+        return self.empty_space not in self.board.values()
