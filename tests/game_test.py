@@ -10,7 +10,7 @@ from mock import Mock
 
 class TestGame:
     def test_display_method_was_called(self):
-        board = Mock()
+        board = Mock(win_combinations=[])
         ui = UI()
         with patch.object(UI, "display", autospect=True) as mock_display:
             game = Game(board, ui)
@@ -18,16 +18,76 @@ class TestGame:
         mock_display.assert_called
 
     def test_display_board_method_was_called(self):
-        board = Mock()
+        board = Mock(win_combinations=[])
         ui = UI()
         with patch.object(Board, "display_board", autospect=True) as mock_display_board:
             game = Game(board, ui)
             game.start()
         mock_display_board.assert_called
 
+    def test_display_if_O_won(self):
+        ui = UI()
+        board = Board(ui)
+        game = Game(board, ui)
+        board.board = {
+            "1": "O",
+            "2": "O",
+            "3": "O",
+            "4": "X",
+            "5": "X",
+            "6": "O",
+            "7": "X",
+            "8": "X",
+            "9": "O",
+        }
+        with patch.object(UI, "display", autospect=True) as mock_display:
+            game = Game(board, ui)
+            game.start()
+        mock_display.assert_any_call("Game over! O is the winner.")
+
+    def test_display_if_X_won(self):
+        ui = UI()
+        board = Board(ui)
+        game = Game(board, ui)
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "X",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "O",
+            "8": "O",
+            "9": "X",
+        }
+        with patch.object(UI, "display", autospect=True) as mock_display:
+            game = Game(board, ui)
+            game.start()
+        mock_display.assert_any_call("Game over! X is the winner.")
+
+    def test_display_if_is_a_draw(self):
+        ui = UI()
+        board = Board(ui)
+        game = Game(board, ui)
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "O",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "X",
+            "8": "O",
+            "9": "X",
+        }
+        with patch.object(UI, "display", autospect=True) as mock_display:
+            game = Game(board, ui)
+            game.start()
+        mock_display.assert_any_call("Game over! It's a draw.")
+
     def test_take_turns_method_was_called(self):
         ui = UI()
-        board = Mock()
+        board = Mock(win_combinations=[])
         with patch.object(Game, "take_turns", autospec=True) as mock_take_turns:
             game = Game(board, ui)
             game.start()
@@ -99,3 +159,91 @@ class TestGame:
         game = Game(board, ui)
         game.switch_players()
         assert game.current_player == "O"
+
+    # tests for is_over method
+    def test_is_over_when_the_board_is_full(self):
+        ui = Mock()
+        board = Board(ui)
+        # draw board
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "O",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "X",
+            "8": "O",
+            "9": "X",
+        }
+        game = Game(board, ui)
+        assert game.is_over() == True
+
+    def test_is_over_when_there_is_a_winner(self):
+        ui = Mock()
+        board = Board(ui)
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "X",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "O",
+            "8": "O",
+            "9": "X",
+        }
+        game = Game(board, ui)
+        assert game.is_over() == True
+
+    def test_is_not_over_when_the_board_is_not_full(self):
+        ui = Mock()
+        board = Board(ui)
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "O",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "X",
+            "8": "O",
+            "9": " ",
+        }
+        game = Game(board, ui)
+        assert game.is_over() == False
+
+    # tests for is_a_win method
+    def test_is_a_win_return_win_combination_if_a_winner(self):
+        ui = UI()
+        board = Board(ui)
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "X",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "O",
+            "8": "O",
+            "9": "X",
+        }
+        game = Game(board, ui)
+        assert game.is_a_win() == True
+
+    def test_is_a_win_return_false_if_no_winner(self):
+        ui = UI()
+        board = Board(ui)
+        board.board = {
+            "1": "X",
+            "2": "X",
+            "3": "O",
+            "4": "O",
+            "5": "O",
+            "6": "X",
+            "7": "X",
+            "8": "O",
+            "9": "X",
+        }
+        game = Game(board, ui)
+        assert game.is_a_win() == False

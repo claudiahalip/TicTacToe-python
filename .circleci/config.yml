@@ -16,6 +16,9 @@ jobs:
           command: pip install pytest
       - run: 
           name: Install dependencies
+          command: pip install ipdb
+      - run: 
+          name: Install dependencies
           command: pip install mock
       - run: 
           name: Run Tests

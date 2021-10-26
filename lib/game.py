@@ -15,9 +15,13 @@ class Game:
         self.ui.display("Welcome to TIC TAC TOE!")
         self.board.display_board()
         self.ui.display(self.current_player + " goes first")
-        while not self.board.board_full(self.board.board):
+        while not self.is_over():
             self.take_turns(self.current_player)
             self.switch_players()
+        if self.is_a_win():
+            self.ui.display("Game over! " + self.winner() + " is the winner.")
+        else:
+            self.ui.display("Game over! It's a draw.")
 
     def take_turns(self, mark):
         self.ui.display("Choose a number between 1 and 9:")
@@ -27,7 +31,8 @@ class Game:
         ):
             self.board.move(input_number, mark)
             self.board.display_board()
-            self.ui.display("It's " + self.next_player + "'s turn")
+            if not self.is_over():
+                self.ui.display("It's " + self.next_player + "'s turn")
         else:
             self.ui.display("Invalid number")
             self.take_turns(mark)
@@ -37,3 +42,28 @@ class Game:
 
     def switch_players(self):
         self.current_player, self.next_player = self.next_player, self.current_player
+
+    def is_over(self):
+        return self.board.board_is_full() or self.is_a_win()
+
+    def is_a_win(self):
+        for win_comb in self.board.win_combinations:
+            if self.is_win_condition_met(win_comb):
+                return True
+        return False
+
+    def is_win_condition_met(self, win_comb):
+        return self.board.board[str(win_comb[0])] == self.board.board[
+            str(win_comb[1])
+        ] == self.board.board[str(win_comb[2])] and self.board.position_taken(
+            str(win_comb[0])
+        )
+
+    def winner(self):
+        for win_comb in self.board.win_combinations:
+            if self.board.board[str(win_comb[0])] == self.board.board[
+                str(win_comb[1])
+            ] == self.board.board[str(win_comb[2])] and self.board.position_taken(
+                str(win_comb[0])
+            ):
+                return self.board.board[str(win_comb[0])]
