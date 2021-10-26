@@ -3,11 +3,11 @@
 from lib.game import *
 from lib.board import *
 from lib.ui import *
-
+from lib.tictactoe_board import *
 
 ui = UI()
 board = Board(ui)
-
-play_game = Game(board, ui)
+tic_tac_toe_board = TicTacToeBoard(ui)
+play_game = Game(tic_tac_toe_board , ui)
 play_game.start()
 

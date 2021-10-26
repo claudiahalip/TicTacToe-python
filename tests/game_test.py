@@ -2,6 +2,7 @@ from ..lib.game import Game
 from ..lib.game import *
 from ..lib.board import *
 from ..lib.ui import *
+from ..lib.tictactoe_board import *
 import pytest
 import mock
 from mock import patch
@@ -20,25 +21,27 @@ class TestGame:
     def test_display_board_method_was_called(self):
         board = Mock(win_combinations=[])
         ui = UI()
-        with patch.object(Board, "display_board", autospect=True) as mock_display_board:
+        with patch.object(
+            TicTacToeBoard, "display_board", autospect=True
+        ) as mock_display_board:
             game = Game(board, ui)
             game.start()
         mock_display_board.assert_called
 
     def test_display_if_O_won(self):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         board.board = {
-            "1": "O",
-            "2": "O",
-            "3": "O",
-            "4": "X",
-            "5": "X",
-            "6": "O",
-            "7": "X",
-            "8": "X",
-            "9": "O",
+            1: "O",
+            2: "O",
+            3: "O",
+            4: "X",
+            5: "X",
+            6: "O",
+            7: "X",
+            8: "X",
+            9: "O",
         }
         with patch.object(UI, "display", autospect=True) as mock_display:
             game = Game(board, ui)
@@ -47,18 +50,18 @@ class TestGame:
 
     def test_display_if_X_won(self):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "X",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "O",
-            "8": "O",
-            "9": "X",
+            1: "X",
+            2: "X",
+            3: "X",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "O",
+            8: "O",
+            9: "X",
         }
         with patch.object(UI, "display", autospect=True) as mock_display:
             game = Game(board, ui)
@@ -67,18 +70,18 @@ class TestGame:
 
     def test_display_if_is_a_draw(self):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "O",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "X",
-            "8": "O",
-            "9": "X",
+            1: "X",
+            2: "X",
+            3: "O",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "X",
+            8: "O",
+            9: "X",
         }
         with patch.object(UI, "display", autospect=True) as mock_display:
             game = Game(board, ui)
@@ -96,13 +99,13 @@ class TestGame:
     # #tests for take_turns method
     # True, true
     @patch.object(UI, "get_user_input", side_effect=["2", "3"])
-    @patch.object(Board, "display_board")
+    @patch.object(TicTacToeBoard, "display_board")
     @patch.object(Board, "move")
     def test_the_take_turns_when_the_input_is_valid_and_the_position_is_not_taken(
         self, mock_input, mock_move, mock_display_board
     ):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         game.take_turns("X")
         mock_move.assert_called_once()
@@ -115,7 +118,7 @@ class TestGame:
         self, mock_display, mock_input
     ):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         board.move("3", "X")
         game.take_turns("X")
@@ -128,7 +131,7 @@ class TestGame:
         self, mock_display, mock_input
     ):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         game.take_turns("X")
         mock_display.assert_any_call("Invalid number")
@@ -140,7 +143,7 @@ class TestGame:
         self, mock_display, mock_input
     ):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         game = Game(board, ui)
         board.move("3", "X")
         game.take_turns("X")
@@ -166,15 +169,15 @@ class TestGame:
         board = Board(ui)
         # draw board
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "O",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "X",
-            "8": "O",
-            "9": "X",
+            1: "X",
+            2: "X",
+            3: "O",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "X",
+            8: "O",
+            9: "X",
         }
         game = Game(board, ui)
         assert game.is_over() == True
@@ -183,32 +186,32 @@ class TestGame:
         ui = Mock()
         board = Board(ui)
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "X",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "O",
-            "8": "O",
-            "9": "X",
+            1: "X",
+            2: "X",
+            3: "X",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "O",
+            8: "O",
+            9: "X",
         }
         game = Game(board, ui)
         assert game.is_over() == True
 
     def test_is_not_over_when_the_board_is_not_full(self):
         ui = Mock()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "O",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "X",
-            "8": "O",
-            "9": " ",
+            1: "X",
+            2: "X",
+            3: "O",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "X",
+            8: "O",
+            9: " ",
         }
         game = Game(board, ui)
         assert game.is_over() == False
@@ -216,34 +219,34 @@ class TestGame:
     # tests for is_a_win method
     def test_is_a_win_return_win_combination_if_a_winner(self):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "X",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "O",
-            "8": "O",
-            "9": "X",
+            1: "X",
+            2: "X",
+            3: "X",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "O",
+            8: "O",
+            9: "X",
         }
         game = Game(board, ui)
         assert game.is_a_win() == True
 
     def test_is_a_win_return_false_if_no_winner(self):
         ui = UI()
-        board = Board(ui)
+        board = TicTacToeBoard(ui)
         board.board = {
-            "1": "X",
-            "2": "X",
-            "3": "O",
-            "4": "O",
-            "5": "O",
-            "6": "X",
-            "7": "X",
-            "8": "O",
-            "9": "X",
+            1: "X",
+            2: "X",
+            3: "O",
+            4: "O",
+            5: "O",
+            6: "X",
+            7: "X",
+            8: "O",
+            9: "X",
         }
         game = Game(board, ui)
         assert game.is_a_win() == False

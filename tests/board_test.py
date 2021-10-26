@@ -17,11 +17,11 @@ class TestBoard:
         assert new_board.board[1] == "X"
 
     # test for position_taken method
-    @pytest.mark.parametrize("test_input, expected", [("1", False), ("2", True)])
+    @pytest.mark.parametrize("test_input, expected", [(1, False), (2, True)])
     def test_position_taken(self, test_input, expected):
         ui = UI()
         new_board = Board(ui)
-        new_board.move("2", "X")
+        new_board.move(2, "X")
         assert new_board.position_taken(test_input) == expected
 
     def test_board_is_full(self):

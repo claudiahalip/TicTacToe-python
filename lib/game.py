@@ -1,5 +1,5 @@
-from .board import *
 from .ui import *
+from .tictactoe_board import *
 
 
 class Game:
@@ -38,7 +38,7 @@ class Game:
             self.take_turns(mark)
 
     def valid_input(self, input):
-        return input in self.board.board.keys()
+        return int(input) in self.board.board.keys()
 
     def switch_players(self):
         self.current_player, self.next_player = self.next_player, self.current_player
@@ -53,17 +53,15 @@ class Game:
         return False
 
     def is_win_condition_met(self, win_comb):
-        return self.board.board[str(win_comb[0])] == self.board.board[
-            str(win_comb[1])
-        ] == self.board.board[str(win_comb[2])] and self.board.position_taken(
-            str(win_comb[0])
-        )
+        return self.board.board[win_comb[0]] == self.board.board[
+            win_comb[1]
+        ] == self.board.board[win_comb[2]] and self.board.position_taken(win_comb[0])
 
     def winner(self):
         for win_comb in self.board.win_combinations:
-            if self.board.board[str(win_comb[0])] == self.board.board[
-                str(win_comb[1])
-            ] == self.board.board[str(win_comb[2])] and self.board.position_taken(
+            if self.board.board[win_comb[0]] == self.board.board[
+                win_comb[1]
+            ] == self.board.board[win_comb[2]] and self.board.position_taken(
                 str(win_comb[0])
             ):
-                return self.board.board[str(win_comb[0])]
+                return self.board.board[win_comb[0]]
