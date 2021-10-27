@@ -12,7 +12,7 @@ class Board:
     def move(self, input, mark):
         self.board[int(input)] = mark
 
-    def position_taken(self, input):
+    def is_position_taken(self, input):
         return self.board[int(input)] != self.empty_space
 
     def board_is_full(self):

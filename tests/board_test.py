@@ -22,7 +22,7 @@ class TestBoard:
         ui = UI()
         new_board = Board(ui)
         new_board.move(2, "X")
-        assert new_board.position_taken(test_input) == expected
+        assert new_board.is_position_taken(test_input) == expected
 
     def test_board_is_full(self):
         ui = UI()

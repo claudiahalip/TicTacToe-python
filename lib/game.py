@@ -26,7 +26,7 @@ class Game:
     def take_turns(self, mark):
         self.ui.display("Choose a number between 1 and 9:")
         input_number = self.ui.get_user_input()
-        if self.valid_input(input_number) and not self.board.position_taken(
+        if self.valid_input(input_number) and not self.board.is_position_taken(
             input_number
         ):
             self.board.move(input_number, mark)
@@ -55,13 +55,13 @@ class Game:
     def is_win_condition_met(self, win_comb):
         return self.board.board[win_comb[0]] == self.board.board[
             win_comb[1]
-        ] == self.board.board[win_comb[2]] and self.board.position_taken(win_comb[0])
+        ] == self.board.board[win_comb[2]] and self.board.is_position_taken(win_comb[0])
 
     def winner(self):
         for win_comb in self.board.win_combinations:
             if self.board.board[win_comb[0]] == self.board.board[
                 win_comb[1]
-            ] == self.board.board[win_comb[2]] and self.board.position_taken(
+            ] == self.board.board[win_comb[2]] and self.board.is_position_taken(
                 str(win_comb[0])
             ):
                 return self.board.board[win_comb[0]]

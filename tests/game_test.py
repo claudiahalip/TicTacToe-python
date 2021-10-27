@@ -100,7 +100,7 @@ class TestGame:
     # True, true
     @patch.object(UI, "get_user_input", side_effect=["2", "3"])
     @patch.object(TicTacToeBoard, "display_board")
-    @patch.object(Board, "move")
+    @patch.object(TicTacToeBoard, "move")
     def test_the_take_turns_when_the_input_is_valid_and_the_position_is_not_taken(
         self, mock_input, mock_move, mock_display_board
     ):
