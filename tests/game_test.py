@@ -1,4 +1,4 @@
-from ..lib.game import Game
+from ..lib.game import *
 from ..lib.ui import *
 from ..lib.tictactoe_board import *
 import pytest
@@ -37,7 +37,7 @@ class TestGame:
     def test_take_turns_method_was_called(self, game_object_with_mock_board):
         with patch.object(Game, "take_turns", autospec=True) as mock_take_turns:
             game_object_with_mock_board.start()
-            mock_take_turns.assert_called
+        mock_take_turns.assert_called
 
     # #tests for take_turns method
     # True, true
@@ -84,7 +84,7 @@ class TestGame:
 
     def test_switch_players_for_next_player_method(self, game_object):
         game_object.switch_players()
-        assert game_object.current_player == "O"
+        assert game_object.current_player.mark == "O"
 
     # tests for is_over method
     def test_is_over_when_the_board_is_full(self, game_object_with_board_draw):

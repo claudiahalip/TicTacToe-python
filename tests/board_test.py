@@ -16,7 +16,7 @@ class TestBoard:
 
     # test for position_taken method
     @pytest.mark.parametrize("test_input, expected", [(1, False), (2, True)])
-    def test_position_taken(self, test_input, expected, board_object):
+    def test__is_position_taken(self, test_input, expected, board_object):
         board_object.move(2, "X")
         assert board_object.is_position_taken(test_input) == expected
 

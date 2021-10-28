@@ -3,20 +3,18 @@ from .tictactoe_board import *
 
 
 class Game:
-
-    current_player = "X"
-    next_player = "O"
-
-    def __init__(self, board, ui):
+    def __init__(self, board, ui, current_player, next_player):
         self.board = board
         self.ui = ui
+        self.current_player = current_player
+        self.next_player = next_player
 
     def start(self):
         self.ui.display("Welcome to TIC TAC TOE!")
         self.board.display_board()
-        self.ui.display(self.current_player + " goes first")
+        self.ui.display(self.current_player.mark + " goes first")
         while not self.is_over():
-            self.take_turns(self.current_player)
+            self.take_turns(self.current_player.mark)
             self.switch_players()
         if self.is_a_win():
             self.ui.display("Game over! " + self.winner() + " is the winner.")
@@ -32,7 +30,7 @@ class Game:
             self.board.move(input_number, mark)
             self.board.display_board()
             if not self.is_over():
-                self.ui.display("It's " + self.next_player + "'s turn")
+                self.ui.display("It's " + self.next_player.mark + "'s turn")
         else:
             self.ui.display("Invalid number")
             self.take_turns(mark)

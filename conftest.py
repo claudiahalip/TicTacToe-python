@@ -3,30 +3,38 @@ import pytest
 import mock
 from mock import patch
 from mock import Mock
+from .lib.human_player import HumanPlayer
 from .lib.board import Board
 from .lib.game import Game
 from .lib.tictactoe_board import TicTacToeBoard
 from .lib.ui import UI
 
+
 @fixture(scope="function")
 def game_object():
     ui = UI()
     board = TicTacToeBoard(ui)
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     return game
 
 @fixture(scope="function")
 def game_object_with_mock_board():
     board = Mock(win_combinations=[])
     ui = UI()
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     return game
 
 @fixture(scope="function")
 def game_object_with_X_on_position_3():
     ui = UI()
     board = TicTacToeBoard(ui)
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     board.move("3", "X")
     return game
 
@@ -45,14 +53,18 @@ def game_object_with_board_0_win():
         8: "X",
         9: "O",
     }
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     return game
 
 @fixture(scope="function")
 def game_object_with_board_X_win():
     ui = UI()
     board = TicTacToeBoard(ui)
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     board.board = {
         1: "X",
         2: "X",
@@ -70,7 +82,9 @@ def game_object_with_board_X_win():
 def game_object_with_board_draw():
     ui = UI()
     board = TicTacToeBoard(ui)
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     board.board = {
         1: "X",
         2: "X",
@@ -88,7 +102,9 @@ def game_object_with_board_draw():
 def game_object_with_unfull_board():
     ui = UI()
     board = TicTacToeBoard(ui)
-    game = Game(board, ui)
+    player1 = HumanPlayer("X")
+    player2 = HumanPlayer("O")
+    game = Game(board, ui, player1, player2)
     board.board = {
         1: "X",
         2: "X",
