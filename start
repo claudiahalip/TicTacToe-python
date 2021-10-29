@@ -2,12 +2,15 @@
 
 from lib.game import *
 from lib.board import *
+from lib.human_player import HumanPlayer
 from lib.ui import *
-
+from lib.tictactoe_board import *
 
 ui = UI()
 board = Board(ui)
-
-play_game = Game(board, ui)
+tic_tac_toe_board = TicTacToeBoard(ui)
+current_player = HumanPlayer("X")
+next_player = HumanPlayer("O")
+play_game = Game(tic_tac_toe_board , ui, current_player, next_player)
 play_game.start()
 
