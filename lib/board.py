@@ -17,3 +17,6 @@ class Board:
 
     def board_is_full(self):
         return self.empty_space not in self.board.values()
+
+    def valid_input(self, input):
+        return int(input) in self.board.keys()
