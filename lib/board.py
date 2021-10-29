@@ -15,8 +15,8 @@ class Board:
     def is_position_taken(self, input):
         return self.board[int(input)] != self.empty_space
 
-    def board_is_full(self):
+    def is_board_full(self):
         return self.empty_space not in self.board.values()
 
-    def valid_input(self, input):
+    def is_input_valid(self, input):
         return int(input) in self.board.keys()

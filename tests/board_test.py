@@ -32,11 +32,11 @@ class TestBoard:
             "8": "O",
             "9": "X",
         }
-        assert board_object.board_is_full() == True
+        assert board_object.is_board_full() == True
 
     def test_board_is_not_full_(self, board_object):
-        assert board_object.board_is_full() == False
+        assert board_object.is_board_full() == False
 
     @pytest.mark.parametrize("input, expected", [("1", True), ("0", False)])
-    def test_valid_input(self, input, expected, board_object):
-        assert board_object.valid_input(input) == expected
+    def test_is_input_valid(self, input, expected, board_object):
+        assert board_object.is_input_valid(input) == expected

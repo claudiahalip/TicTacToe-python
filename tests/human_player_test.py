@@ -14,7 +14,7 @@ class TestsHumanPlayer:
     # #tests for mark_position method
     # True, true
     @patch.object(UI, "get_user_input", side_effect=["2", "3"])
-    @patch.object(Board, "mark_position")
+    @patch.object(TicTacToeBoard, "mark_position")
     def test_move_when_the_input_is_valid_and_the_position_is_not_taken(
         self, mock_input, mock_mark_position, player_object
     ):
@@ -28,7 +28,7 @@ class TestsHumanPlayer:
         self, mock_display, mock_input, player_object
     ):
         player_object.move()
-        mock_display.assert_any_call("Invalid number")
+        mock_display.assert_any_call("Invalid choice! Try again")
 
     # False, true
     @patch.object(UI, "get_user_input", side_effect=["0", "2"])
@@ -37,7 +37,7 @@ class TestsHumanPlayer:
         self, mock_display, mock_input, player_object
     ):
         player_object.move()
-        mock_display.assert_any_call("Invalid number")
+        mock_display.assert_any_call("Invalid choice! Try again")
 
     # false, false
     @patch.object(UI, "get_user_input", side_effect=["0", "3", "2"])
@@ -46,4 +46,4 @@ class TestsHumanPlayer:
         self, mock_display, mock_input, player_object
     ):
         player_object.move()
-        mock_display.assert_any_call("Invalid number")
+        mock_display.assert_any_call("Invalid choice! Try again")

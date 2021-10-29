@@ -1,3 +1,4 @@
+from .ui import *
 from .tictactoe_board import *
 from .computer_player import *
 from .human_player import *
@@ -22,4 +23,4 @@ class GameSelection:
             return [current_player, next_player]
         else:
             self.ui.display("Invalid choice, try again!")
-            self.select_game_type()
+        return self.select_game_type()

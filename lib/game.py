@@ -29,7 +29,7 @@ class Game:
         self.current_player, self.next_player = self.next_player, self.current_player
 
     def is_over(self):
-        return self.board.board_is_full() or self.is_a_win()
+        return self.board.is_board_full() or self.is_a_win()
 
     def is_a_win(self):
         for win_comb in self.board.win_combinations:
