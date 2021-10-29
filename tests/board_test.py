@@ -10,14 +10,14 @@ from mock import Mock
 
 
 class TestBoard:
-    def test_move_marks_the_board_with_marker(self, board_object):
-        board_object.move(1, "X")
+    def test_mark_position_marks_the_board_with_marker(self, board_object):
+        board_object.mark_position(1, "X")
         assert board_object.board[1] == "X"
 
     # test for position_taken method
     @pytest.mark.parametrize("test_input, expected", [(1, False), (2, True)])
     def test__is_position_taken(self, test_input, expected, board_object):
-        board_object.move(2, "X")
+        board_object.mark_position(2, "X")
         assert board_object.is_position_taken(test_input) == expected
 
     def test_board_is_full(self, board_object):
@@ -36,3 +36,7 @@ class TestBoard:
 
     def test_board_is_not_full_(self, board_object):
         assert board_object.board_is_full() == False
+
+    @pytest.mark.parametrize("input, expected", [("1", True), ("0", False)])
+    def test_valid_input(self, input, expected, board_object):
+        assert board_object.valid_input(input) == expected
