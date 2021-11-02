@@ -21,5 +21,8 @@ jobs:
           name: Install dependencies
           command: pip install mock
       - run: 
+          name: Install dependencies
+          command: pip install emoji
+      - run: 
           name: Run Tests
           command: pytest
