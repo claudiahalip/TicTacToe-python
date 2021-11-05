@@ -3,6 +3,7 @@ from .ui import *
 
 
 class TicTacToeBoard(Board):
+
     win_combinations = [
         [1, 2, 3],
         [4, 5, 6],

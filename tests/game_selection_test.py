@@ -40,8 +40,8 @@ class TestGameSelections:
     ):
         players = game_selection_object.select_game_type()
         assert (
-            isinstance(players[0], HumanPlayer) == True
-            and isinstance(players[1], ComputerPlayer) == True
+            isinstance(players[1], HumanPlayer) == True
+            and isinstance(players[0], ComputerPlayer) == True
         )
 
     @patch.object(UI, "get_user_input", side_effect=["$"])
