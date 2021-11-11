@@ -8,7 +8,14 @@ install python3
 
 install pip [pip3](https://pip.pypa.io/en/stable/) 
 
-to isntall all the dependencies run:
+create a virtual environment:
+ ```python3 -m venv <name virtual environment>```
+
+activate virtual environment:
+
+```source <name virtual environment>/bin/activate```
+
+to install all the dependencies run:
 ```pip install -r requirements.txt```
 
 

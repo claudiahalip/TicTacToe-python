@@ -16,7 +16,7 @@ class Game:
             self.take_turns()
             self.switch_players()
         if self.is_a_win():
-            self.ui.display("Game over! " + self.winner() + " is the winner.")
+            self.ui.display("Game over! " + self.get_winner() + " is the winner.")
         else:
             self.ui.display("Game over! It's a draw.")
 
@@ -32,21 +32,24 @@ class Game:
         return self.board.is_board_full() or self.is_a_win()
 
     def is_a_win(self):
-        for win_comb in self.board.win_combinations:
-            if self.is_win_condition_met(win_comb):
-                return True
+        if self.is_a_winner(self.current_player.mark) or self.is_a_winner(
+            self.next_player.mark
+        ):
+            return True
         return False
 
-    def is_win_condition_met(self, win_comb):
-        return self.board.board[win_comb[0]] == self.board.board[
-            win_comb[1]
-        ] == self.board.board[win_comb[2]] and self.board.is_position_taken(win_comb[0])
+    def get_winner(self):
+        if self.is_a_winner(self.current_player.mark):
+            return self.current_player.mark
+        else:
+            return self.next_player.mark
 
-    def winner(self):
-        for win_comb in self.board.win_combinations:
-            if self.board.board[win_comb[0]] == self.board.board[
-                win_comb[1]
-            ] == self.board.board[win_comb[2]] and self.board.is_position_taken(
-                str(win_comb[0])
-            ):
-                return self.board.board[win_comb[0]]
+    def is_a_winner(self, player):
+        for win_comb in self.board.win_combinations():
+            win = {}
+            for num in win_comb:
+                win.update({num: self.board.board[num]})
+            if all(value == player for value in win.values()):
+                return True
+        else:
+            return False

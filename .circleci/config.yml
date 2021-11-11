@@ -22,7 +22,7 @@ jobs:
           command: pip install mock
       - run: 
           name: Install dependencies
-          command: pip install emoji
+          command: pip install numpy
       - run: 
           name: Run Tests
           command: pytest

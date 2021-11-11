@@ -2,6 +2,7 @@ from .ui import *
 from .tictactoe_board import *
 from .computer_player import *
 from .human_player import *
+from .ai_computer_player import *
 
 
 class GameSelection:
@@ -14,19 +15,19 @@ class GameSelection:
         self.board = board
 
     def select_game_type(self):
-        self.display_welcome_message()
-        self.ui.display("Choose h for human vs. human game or c for human vs computer")
+        self.ui.display(
+            "Select a game type: \n h for human vs. human game \n c for easy computer vs human \n a for intelligent computer vs human"
+        )
         input = self.ui.get_user_input()
         if input == "h":
-            return self.create_human_vs_human_players()
+            return self.create_players("human")
         elif input == "c":
-            return self.create_human_vs_computer_players()
+            return self.create_players("computer")
+        elif input == "a":
+            return self.create_players("ai_computer")
         else:
             self.ui.display("Invalid choice, try again!")
             return self.select_game_type()
-
-    def display_welcome_message(self):
-        return self.ui.display("Welcome to TIC TAC TOE!")
 
     def select_a_marker(self, player):
         self.ui.display(player + ", you can choose a marker now!")
@@ -36,22 +37,18 @@ class GameSelection:
             marker = self.ui.get_user_input()
         return marker
 
-    def create_human_vs_human_players(self):
+    def create_players(self, player):
         marker_player_1 = self.select_a_marker(self.first_player)
-        current_player = HumanPlayer(self.ui, self.board, marker_player_1)
+        if player == "ai_computer":
+            current_player = AiComputerPlayer(self.board, marker_player_1, self.ui)
+        elif player == "human":
+            current_player = HumanPlayer(self.ui, self.board, marker_player_1)
+        elif player == "computer":
+            current_player = ComputerPlayer(self.board, marker_player_1, self.ui)
+
         marker_player_2 = self.select_a_marker(self.second_player)
         while marker_player_1 == marker_player_2:
             self.ui.display("This marker is already used. Choose another one!")
             marker_player_2 = self.select_a_marker(self.second_player)
         next_player = HumanPlayer(self.ui, self.board, marker_player_2)
-        return [current_player, next_player]
-
-    def create_human_vs_computer_players(self):
-        marker_player_1 = self.select_a_marker(self.first_player)
-        current_player = HumanPlayer(self.ui, self.board, marker_player_1)
-        marker_player_2 = self.select_a_marker(self.second_player)
-        while marker_player_1 == marker_player_2:
-            self.ui.display("This marker is already used. Choose another one!")
-            marker_player_2 = self.select_a_marker(self.second_player)
-        next_player = ComputerPlayer(self.board, marker_player_2)
         return [current_player, next_player]
