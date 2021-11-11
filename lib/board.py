@@ -20,3 +20,6 @@ class Board:
 
     def is_input_valid(self, input):
         return int(input) in self.board.keys()
+
+    def get_empty_spaces(self):
+        return [k for k in self.board if self.board[k] == self.empty_space]

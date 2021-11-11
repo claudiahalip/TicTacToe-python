@@ -15,7 +15,7 @@ class TestComputerPlayer:
     def test_next_available_space_index_when_borad_is_empty(self):
         ui = UI()
         board = TicTacToeBoard(ui)
-        computer_player = ComputerPlayer(board, "X")
+        computer_player = ComputerPlayer(board, "X", ui)
         assert computer_player.next_available_space_index() == 1
 
     def test_next_available_space_index_when_board_is_partially_full(self):
@@ -32,5 +32,5 @@ class TestComputerPlayer:
             8: "O",
             9: " ",
         }
-        computer_player = ComputerPlayer(board, "X")
+        computer_player = ComputerPlayer(board, "X", ui)
         assert computer_player.next_available_space_index() == 4
