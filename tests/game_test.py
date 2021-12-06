@@ -1,6 +1,7 @@
-from ..lib.game import *
-from ..lib.ui import *
-from ..lib.tictactoe_board import *
+from numpy import array
+from lib.game import *
+from lib.ui import *
+from lib.tictactoe_board import *
 import pytest
 import mock
 from mock import patch
@@ -29,9 +30,9 @@ class TestGame:
             game_object_with_board_draw.start()
         mock_display.assert_any_call("Game over! It's a draw.")
 
-    def test_take_turns_method_was_called(self, game_object_with_mock_board):
+    def test_take_turns_method_was_called(self, game_object_with_1_empty_space_board):
         with patch.object(Game, "take_turns", autospec=True) as mock_take_turns:
-            game_object_with_mock_board.start()
+            game_object_with_1_empty_space_board.start()
         mock_take_turns.assert_called
 
     def test_switch_players_for_next_player_method(self, game_object):
@@ -51,10 +52,28 @@ class TestGame:
         assert game_object_with_unfull_board.is_over() == False
 
     # tests for is_a_win method
-    def test_is_a_win_return_win_combination_if_a_winner(
-        self, game_object_with_board_X_win
-    ):
+    def test_is_a_win_return_true_if_a_winner(self, game_object_with_board_X_win):
         assert game_object_with_board_X_win.is_a_win() == True
 
     def test_is_a_win_return_false_if_no_winner(self, game_object_with_board_draw):
         assert game_object_with_board_draw.is_a_win() == False
+
+    def test_is_a_winner_return_true_if_a_winner_on_3x3_test(
+        self, game_object_with_board_X_win
+    ):
+        assert game_object_with_board_X_win.is_a_winner("X") == True
+
+    def test_is_a_winner_return_false_if_no_winner_on_3x3_test(
+        self, game_object_with_board_draw
+    ):
+        assert game_object_with_board_draw.is_a_winner("O") == False
+
+    def test_is_a_winner_return_true_if_a_winner_on_4x4_test(
+        self, game_object_with_board_X_win_on_4x4_board
+    ):
+        assert game_object_with_board_X_win_on_4x4_board.is_a_winner("X") == True
+
+    def test_is_a_winner_return_false_if_no_winner_on_4x4_test(
+        self, game_object_with_draw_board_on_4x4_board
+    ):
+        assert game_object_with_draw_board_on_4x4_board.is_a_winner("O") == False

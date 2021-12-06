@@ -3,13 +3,12 @@ import mock
 from mock import patch
 from mock import Mock
 
-from ..lib.computer_player import ComputerPlayer
-
-from ..lib.human_player import HumanPlayer
-from ..lib.game import *
-from ..lib.ui import *
-from ..lib.tictactoe_board import *
-from ..lib.ai_computer_player import *
+from lib.computer_player import ComputerPlayer
+from lib.human_player import HumanPlayer
+from lib.game import *
+from lib.ui import *
+from lib.tictactoe_board import *
+from lib.ai_computer_player import *
 
 
 class TestAiComputerPlayer:

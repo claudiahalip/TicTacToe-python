@@ -16,33 +16,34 @@ class AiComputerPlayer:
         self.board.mark_position(index, self.mark)
         self.board.display_board()
 
-    def is_a_winner(self):
-        for win_comb in self.board.win_combinations:
-            if (
-                self.board.board[win_comb[0]]
-                == self.board.board[win_comb[1]]
-                == self.board.board[win_comb[2]]
-                and self.board.board[win_comb[0]] != self.board.empty_space
-            ):
+    def get_winner(self, player):
+        for win_comb in self.board.win_combinations():
+            win = {}
+            for num in win_comb:
+                win.update({num: self.board.board[num]})
+            if all(value == player for value in win.values()):
+                return player
+
+    def is_a_winner(self, player):
+        for win_comb in self.board.win_combinations():
+            win = {}
+            for num in win_comb:
+                win.update({num: self.board.board[num]})
+            if all(value == player for value in win.values()):
                 return True
             else:
                 return False
 
-    def get_winner(self, player):
-        for win_comb in self.board.win_combinations:
-            if (
-                self.board.board[win_comb[0]]
-                == self.board.board[win_comb[1]]
-                == self.board.board[win_comb[2]]
-                == player
-            ):
-                return player
-
     def minimax(self, depth, is_max, player_1, player_2):
-        if self.board.is_board_full() and not self.is_a_winner():
+        if (
+            self.board.is_board_full()
+            and not self.is_a_winner(player_1)
+            and not self.is_a_winner(player_2)
+        ):
             return 0
         elif self.get_winner(player_1):
             return 10 - depth
+
         elif self.get_winner(player_2):
             return -10 + depth
 

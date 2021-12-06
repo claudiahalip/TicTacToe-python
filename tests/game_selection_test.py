@@ -3,19 +3,12 @@ import mock
 from mock import patch
 from mock import Mock
 
-from ..lib.ui import UI
-from ..lib.game_selection import *
-from ..lib.tictactoe_board import *
+from lib.ui import UI
+from lib.game_selection import *
+from lib.tictactoe_board import *
 
 
 class TestGameSelections:
-    def test_display_method_was_called_with_welcome_message(
-        self, game_selection_object
-    ):
-        with patch.object(UI, "display", autospect=True) as mock_display:
-            game_selection_object.display_welcome_message()
-        mock_display.assert_called_with("Welcome to TIC TAC TOE!")
-
     @patch.object(UI, "get_user_input", side_effect=["g", "c", "h", "c"])
     def test_display_method_was_called_with_invalid_input_message(
         self, mock_input, game_selection_object

@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
+from lib.board_selection import BoardSelection
 from lib.game import *
 from lib.game_selection import GameSelection
 from lib.ui import *
 from lib.tictactoe_board import *
 
 ui = UI()
-tictactoe_board = TicTacToeBoard(ui)
+board_selection = BoardSelection(ui)
+tictactoe_board = board_selection.select_board_size()
 game_selection = GameSelection(ui, tictactoe_board)
 players = game_selection.select_game_type()
 play_game = Game(tictactoe_board, ui, players)

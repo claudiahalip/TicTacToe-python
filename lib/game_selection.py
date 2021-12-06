@@ -15,9 +15,8 @@ class GameSelection:
         self.board = board
 
     def select_game_type(self):
-        self.display_welcome_message()
         self.ui.display(
-            "Choose h for human vs. human game, c for easy computer vs human vs or a for intelligent computer vs human"
+            "Select a game type: \n h for human vs. human game \n c for easy computer vs human \n a for intelligent computer vs human"
         )
         input = self.ui.get_user_input()
         if input == "h":
@@ -29,9 +28,6 @@ class GameSelection:
         else:
             self.ui.display("Invalid choice, try again!")
             return self.select_game_type()
-
-    def display_welcome_message(self):
-        return self.ui.display("Welcome to TIC TAC TOE!")
 
     def select_a_marker(self, player):
         self.ui.display(player + ", you can choose a marker now!")
